@@ -11,6 +11,11 @@ def enroll_student():
     student_id = int(input("Enter student ID: "))
     enrollment_status_input = input("Is the student enrolled? (yes/no): ").lower()
 
+    for student in stuData.student_list:
+        if student.get_student_id() == student_id:
+            print(f"Student with ID {student_id} already exists. Enrollment failed.")
+            return
+
     if enrollment_status_input == 'yes':
         is_enrolled = True
     else:
@@ -23,9 +28,9 @@ def enroll_student():
 def drop_student():
     student_id = int(input("Enter student ID to drop: "))
     for student in stuData.student_list:
-        if student.student_id == student_id:
+        if student.get_student_id() == student_id:
             student.drop_student()
-            print(f"Student {student.name} dropped successfully!")
+            print(f"Student {student.get_name()} dropped successfully!")
             return
     print("Student not found!")
 
